@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Surprise — one word, four languages</title>
+  <meta name="description" content="A small site about the word “surprise”: where it comes from, what it does to us, and why not everybody likes it.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#FAF6EE">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23F59E0B'/%3E%3Ctext x='32' y='47' font-size='42' font-weight='700' text-anchor='middle' font-family='Georgia,serif' fill='%231B1A3A'%3E!%3C/text%3E%3C/svg%3E">
+
+  <!-- Apply saved theme / motion before first paint, so nothing flashes -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.className += ' js';
+      try {
+        var t = localStorage.getItem('sp-theme');
+        if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+        var m = localStorage.getItem('sp-motion');
+        if (m === 'on' || m === 'off') d.setAttribute('data-motion', m);
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ ICONS ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><rect x="3" y="7" width="18" height="4" rx="1.2"/><path d="M12 7v14M12 7c-2-4-6.2-3.2-5.2-1S12 7 12 7zm0 0c2-4 6.2-3.2 5.2-1S12 7 12 7z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+  <symbol id="i-wave" viewBox="0 0 24 24"><path d="M2.5 12c2.4-5 5.3-5 7.7 0s5.3 5 7.7 0"/><circle cx="21" cy="12" r="1.3"/></symbol>
+  <symbol id="i-still" viewBox="0 0 24 24"><path d="M3 12h18"/><circle cx="21" cy="12" r="1.3"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.7 5.6 3.7 9s-1.2 6.4-3.7 9c-2.5-2.6-3.7-5.6-3.7-9S9.5 5.6 12 3z"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h11"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2.5c.6 4.6 2.9 6.9 7.5 7.5-4.6.6-6.9 2.9-7.5 7.5-.6-4.6-2.9-6.9-7.5-7.5 4.6-.6 6.9-2.9 7.5-7.5z"/></symbol>
+  <symbol id="i-brain" viewBox="0 0 24 24"><path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 3 3h0a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-3 3h0a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.5 4.5 13.5H11l-1 8 8.5-11H12z"/></symbol>
+  <symbol id="i-memory" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 15 5-4 4 3 3-2 6 4"/><circle cx="15.5" cy="9.5" r="1.5"/></symbol>
+  <symbol id="i-door" viewBox="0 0 24 24"><path d="M5 21V4a1 1 0 0 1 1-1h9l4 2v16"/><path d="M3 21h18M15 3v18"/><circle cx="12" cy="12" r=".8"/></symbol>
+  <symbol id="i-dice" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="8.5" cy="8.5" r="1.2"/><circle cx="15.5" cy="15.5" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="15.5" cy="8.5" r="1.2"/><circle cx="8.5" cy="15.5" r="1.2"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.5-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.5 4.5L20 16M20 20v-4h-4"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7a4.3 4.3 0 0 1 7.5 2.8C19.5 15.4 12 20 12 20z"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.2"/></symbol>
+</defs></svg>
+
+<a class="skip" href="#views" data-i18n="skip">Skip to content</a>
+<div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+
+<!-- ============ HEADER / MENU ============ -->
+<header class="site-header" id="site-header">
+  <div class="bar" id="bar">
+    <a class="brand" href="#/home"><span data-i18n="word">surprise</span><b aria-hidden="true">!</b></a>
+
+    <nav class="nav" id="nav" aria-label="Menu" data-i18n-attr="aria-label:ctrl.menu">
+      <ul class="nav__list" id="navList">
+        <li><a href="#/home" data-page="home"><b>00</b><span data-i18n="nav.home">Start</span></a></li>
+        <li><a href="#/word" data-page="word"><b>01</b><span data-i18n="nav.word">The word</span></a></li>
+        <li><a href="#/science" data-page="science"><b>02</b><span data-i18n="nav.science">The science</span></a></li>
+        <li><a href="#/sides" data-page="sides"><b>03</b><span data-i18n="nav.sides">Two sides</span></a></li>
+        <li><a href="#/voices" data-page="voices"><b>04</b><span data-i18n="nav.voices">Voices</span></a></li>
+        <li><a href="#/make" data-page="make"><b>05</b><span data-i18n="nav.make">Make one</span></a></li>
+        <li><a href="#/play" data-page="play"><b>06</b><span data-i18n="nav.play">Play</span></a></li>
+        <li class="nav__extra"><a href="#/about" data-page="about"><b aria-hidden="true"><svg><use href="#i-info"/></svg></b><span data-i18n="nav.about">Behind the site</span></a></li>
+      </ul>
+      <span class="nav__pill" id="navPill" aria-hidden="true"></span>
+    </nav>
+
+    <div class="bar__tools">
+      <span class="giftpill" id="giftCount"><svg><use href="#i-gift"/></svg><span><b id="giftNum">0</b>/5</span></span>
+      <div class="settings">
+        <button class="tool" id="setBtn" type="button" aria-expanded="false" aria-controls="setPanel">
+          <svg><use href="#i-sliders"/></svg><span class="tool__lang" id="langCode">EN</span>
+          <span class="sr-only" data-i18n="settings">Settings</span>
+        </button>
+        <div class="settings__panel" id="setPanel" hidden>
+          <p class="settings__label" id="lbl-theme"><svg><use href="#i-sun"/></svg><span data-i18n="ctrl.theme">Theme</span></p>
+          <div class="seg" role="group" aria-labelledby="lbl-theme">
+            <button type="button" data-set-theme="light" aria-pressed="false"><svg><use href="#i-sun"/></svg><span data-i18n="theme.light">Light</span></button>
+            <button type="button" data-set-theme="auto" aria-pressed="true"><svg><use href="#i-monitor"/></svg><span data-i18n="theme.auto">System</span></button>
+            <button type="button" data-set-theme="dark" aria-pressed="false"><svg><use href="#i-moon"/></svg><span data-i18n="theme.dark">Dark</span></button>
+          </div>
+          <p class="settings__label" id="lbl-lang"><svg><use href="#i-globe"/></svg><span data-i18n="ctrl.lang">Language</span></p>
+          <div class="seg seg--lang" role="group" aria-labelledby="lbl-lang">
+            <button type="button" data-set-lang="en" lang="en" aria-pressed="true">English</button>
+            <button type="button" data-set-lang="ro" lang="ro" aria-pressed="false">Română</button>
+            <button type="button" data-set-lang="de" lang="de" aria-pressed="false">Deutsch</button>
+            <button type="button" data-set-lang="hu" lang="hu" aria-pressed="false">Magyar</button>
+          </div>
+          <p class="settings__label" id="lbl-motion"><svg><use href="#i-wave"/></svg><span data-i18n="ctrl.motion">Motion</span></p>
+          <div class="seg" role="group" aria-labelledby="lbl-motion">
+            <button type="button" data-set-motion="on" aria-pressed="false"><svg><use href="#i-wave"/></svg><span data-i18n="motion.full">On</span></button>
+            <button type="button" data-set-motion="off" aria-pressed="false"><svg><use href="#i-still"/></svg><span data-i18n="motion.reduced">Off</span></button>
+          </div>
+          <p class="settings__hint" data-i18n="motion.hint">With motion off, nothing moves and everything is shown straight away.</p>
+        </div>
+      </div>
+      <button class="tool tool--menu" id="menuBtn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu" data-i18n-attr="aria-label:ctrl.menu"><svg class="ic-open"><use href="#i-menu"/></svg><svg class="ic-close"><use href="#i-close"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="views" class="views" tabindex="-1">
+
+  <!-- ================= 00 START ================= -->
+  <section class="view" id="/home" data-view="home" aria-labelledby="t-home">
+    <div class="hero">
+      <div class="deco" aria-hidden="true">
+        <i class="d d1"></i><i class="d d2"></i><i class="d d3"></i><i class="d d4"></i><i class="d d5"></i><i class="d d7"></i><i class="d d8"></i>
+        <svg class="d d6" viewBox="0 0 120 30"><path d="M4 15c9-14 19-14 28 0s19 14 28 0 19-14 28 0 19 14 28 0"/></svg>
+      </div>
+
+      <div class="wrap hero-inner">
+        <p class="eyebrow" data-i18n="hero.eyebrow">One word · four languages</p>
+        <h1 class="hero-word" id="t-home">
+          <span class="sr-only" data-i18n="word">surprise</span>
+          <span class="letters" id="letters" aria-hidden="true">surprise</span><span class="bang" aria-hidden="true">!</span>
+        </h1>
+
+        <div class="hero-grid">
+          <div class="hero-text">
+            <p class="hero-lead" data-i18n="home.lead">It lasts only a few seconds, yet we remember it for years. This site is about one small word and everything hidden inside it.</p>
+            <div class="say">
+              <span class="say-label" id="lbl-say" data-i18n="hero.pick">Say it in:</span>
+              <ul class="say-list" aria-labelledby="lbl-say">
+                <li><button type="button" data-set-lang="en" lang="en" aria-pressed="true">surprise</button></li>
+                <li><button type="button" data-set-lang="de" lang="de" aria-pressed="false">Überraschung</button></li>
+                <li><button type="button" data-set-lang="ro" lang="ro" aria-pressed="false">surpriză</button></li>
+                <li><button type="button" data-set-lang="hu" lang="hu" aria-pressed="false">meglepetés</button></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="ask" role="group" aria-labelledby="ask-q">
+            <h2 class="ask-q" id="ask-q" data-i18n="ask.q">Before anything moves: do you like surprises?</h2>
+            <p data-i18n="ask.p">This site can pop, wobble and throw confetti — or stay perfectly still and tell you what’s coming. You choose.</p>
+            <div class="ask-buttons">
+              <button type="button" class="btn btn-accent" data-set-motion="on" aria-pressed="false" data-i18n="ask.yes">Yes, surprise me</button>
+              <button type="button" class="btn btn-ghost" data-set-motion="off" aria-pressed="false" data-i18n="ask.no">No, keep it calm</button>
+            </div>
+            <p class="ask-state" id="ask-state" role="status"></p>
+            <p class="ask-hint" id="ask-sys" data-i18n="ask.sys" hidden>Your device asks for reduced motion, so nothing moves unless you say so.</p>
+            <p class="ask-hint" data-i18n="ask.hint">You can change your mind any time in Settings, top right.</p>
+          </div>
+        </div>
+        <button class="gift gift--float" data-gift="1" type="button" aria-label="A small hidden gift" data-i18n-attr="aria-label:gift.aria"><svg><use href="#i-gift"/></svg></button>
+      </div>
+    </div>
+
+    <!-- four words, running (or standing still) -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span lang="en">surprise</span><i>✦</i><span lang="de">Überraschung</span><i>✦</i><span lang="ro">surpriză</span><i>✦</i><span lang="hu">meglepetés</span><i>✦</i>
+        <span lang="en">surprise</span><i>✦</i><span lang="de">Überraschung</span><i>✦</i><span lang="ro">surpriză</span><i>✦</i><span lang="hu">meglepetés</span><i>✦</i>
+        <span lang="en">surprise</span><i>✦</i><span lang="de">Überraschung</span><i>✦</i><span lang="ro">surpriză</span><i>✦</i><span lang="hu">meglepetés</span><i>✦</i>
+        <span lang="en">surprise</span><i>✦</i><span lang="de">Überraschung</span><i>✦</i><span lang="ro">surpriză</span><i>✦</i><span lang="hu">meglepetés</span><i>✦</i>
+      </div>
+    </div>
+
+    <div class="wrap page">
+      <!-- the fortune cookie -->
+      <section class="cookie reveal" aria-labelledby="cookie-title">
+        <button type="button" class="cookie__btn" id="cookie-btn">
+          <svg class="ck" id="ck" viewBox="0 0 200 150" aria-hidden="true">
+            <g class="ck-rays"><path d="M100 28V8M68 34 56 18M132 34l12-16M42 50 26 40M158 50l16-10"/></g>
+            <g class="ck-paper">
+              <rect x="52" y="60" width="96" height="26" rx="2"/>
+              <path d="M64 69h72M64 77h48"/>
+            </g>
+            <g class="ck-l">
+              <path class="ck-shell" d="M100 44C74 12 22 22 16 70c-3 30 32 52 68 42 8-2 13-8 16-16L95 80l9-12-10-12z"/>
+              <path class="ck-shade" d="M30 92c14 14 34 18 52 14"/>
+              <path class="ck-shine" d="M36 48c8-10 20-15 32-14"/>
+            </g>
+            <g class="ck-r">
+              <path class="ck-shell" d="M100 44c26-32 78-22 84 26 3 30-32 52-68 42-8-2-13-8-16-16L95 80l9-12-10-12z"/>
+              <path class="ck-shade" d="M170 92c-14 14-34 18-52 14"/>
+              <path class="ck-shine" d="M132 34c12-1 24 4 32 14"/>
+            </g>
+          </svg>
+          <span class="btn btn-accent" id="cookie-label">Crack it open</span>
+        </button>
+
+        <div class="cookie__body">
+          <h2 id="cookie-title" data-i18n="cookie.title">A cookie with a note inside</h2>
+          <p class="cookie__mode wild-only" data-i18n="cookie.wild">Crack it open. You don't get to choose what it says.</p>
+          <p class="cookie__mode calm-only" data-i18n="cookie.calm">Calm mode: the cookie is already open, and you're told what kind of note comes next.</p>
+          <div class="slip is-empty" id="slip" aria-live="polite">
+            <p class="slip__kind" id="slip-kind"></p>
+            <p class="slip__text" id="slip-text">Your note will appear here.</p>
+          </div>
+          <p class="cookie__coming calm-only" id="slip-coming"></p>
+        </div>
+      </section>
+
+      <h2 class="sectiontitle reveal" data-i18n="home.chapters">Chapters</h2>
+      <ol class="chapters">
+        <li class="reveal"><a href="#/word" class="chapter chapter--1"><b>01</b><strong data-i18n="nav.word">The word</strong><span data-i18n="ch.word">…</span><svg><use href="#i-arrow"/></svg></a></li>
+        <li class="reveal"><a href="#/science" class="chapter chapter--2"><b>02</b><strong data-i18n="nav.science">The science</strong><span data-i18n="ch.science">…</span><svg><use href="#i-arrow"/></svg></a></li>
+        <li class="reveal"><a href="#/sides" class="chapter chapter--3"><b>03</b><strong data-i18n="nav.sides">Two sides</strong><span data-i18n="ch.sides">…</span><svg><use href="#i-arrow"/></svg></a></li>
+        <li class="reveal"><a href="#/voices" class="chapter chapter--4"><b>04</b><strong data-i18n="nav.voices">Voices</strong><span data-i18n="ch.voices">…</span><svg><use href="#i-arrow"/></svg></a></li>
+        <li class="reveal"><a href="#/make" class="chapter chapter--5"><b>05</b><strong data-i18n="nav.make">Make one</strong><span data-i18n="ch.make">…</span><svg><use href="#i-arrow"/></svg></a></li>
+        <li class="reveal"><a href="#/play" class="chapter chapter--6"><b>06</b><strong data-i18n="nav.play">Play</strong><span data-i18n="ch.play">…</span><svg><use href="#i-arrow"/></svg></a></li>
+      </ol>
+
+      <aside class="hunt reveal">
+        <div class="ring" id="giftRing" style="--p:0"><span><b id="giftNum2">0</b>/5</span></div>
+        <div>
+          <h2 data-i18n="hunt.title">Five hidden gifts</h2>
+          <p data-i18n="hunt.text">Small surprises are hidden across these pages. No hints, no countdown. Just look closely.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ================= 01 THE WORD ================= -->
+  <section class="view" id="/word" data-view="word" aria-labelledby="t-word">
+    <div class="wrap page">
+      <header class="vhead reveal">
+        <p class="kicker"><b>01</b> <span data-i18n="nav.word">The word</span></p>
+        <h1 id="t-word" data-i18n="word.title">It began as an ambush</h1>
+        <p class="intro" data-i18n="word.intro">In none of these four languages did the word start with gifts. It started with being caught off guard — and it only became a feeling later.</p>
+      </header>
+
+      <ul class="words">
+        <li class="word-card reveal" data-lang-card="en">
+          <p class="word-lang"><span data-i18n="lang.en">English</span><span class="here" data-i18n="word.here">You’re reading in this one</span></p>
+          <p class="word-big" lang="en">surprise</p>
+          <p class="word-parts"><span lang="fro">sur + prendre</span></p>
+          <p class="word-gloss" data-i18n="word.en.gloss">over + to take (Old French)</p>
+          <p class="word-note" data-i18n="word.en.note">In the 1400s a “surprise” was a sudden attack. The feeling came two centuries later.</p>
+        </li>
+        <li class="word-card reveal" data-lang-card="de">
+          <p class="word-lang"><span data-i18n="lang.de">German</span><span class="here" data-i18n="word.here">You’re reading in this one</span></p>
+          <p class="word-big" lang="de">Überraschung</p>
+          <p class="word-parts"><span lang="de">über + rasch</span></p>
+          <p class="word-gloss" data-i18n="word.de.gloss">over + quick</p>
+          <p class="word-note" data-i18n="word.de.note">A soldier’s word in the 1500s: to fall upon someone so quickly that they cannot react.</p>
+        </li>
+        <li class="word-card reveal" data-lang-card="ro">
+          <p class="word-lang"><span data-i18n="lang.ro">Romanian</span><span class="here" data-i18n="word.here">You’re reading in this one</span></p>
+          <p class="word-big" lang="ro">surpriză</p>
+          <p class="word-parts"><span lang="fr">← surprise</span></p>
+          <p class="word-gloss" data-i18n="word.ro.gloss">borrowed from French</p>
+          <p class="word-note" data-i18n="word.ro.note">Borrowed in the 1800s. The verb “a surprinde” still carries both meanings: to amaze someone, and to catch them in the act.</p>
+        </li>
+        <li class="word-card reveal" data-lang-card="hu">
+          <p class="word-lang"><span data-i18n="lang.hu">Hungarian</span><span class="here" data-i18n="word.here">You’re reading in this one</span></p>
+          <p class="word-big" lang="hu">meglepetés</p>
+          <p class="word-parts"><span lang="hu">meg + lep</span></p>
+          <p class="word-gloss" data-i18n="word.hu.gloss">fully + to cover, to come upon</p>
+          <p class="word-note" data-i18n="word.hu.note">The root “lep” means to cover, to come upon someone — the same root as “lepedő”, a bed sheet. A surprise is something that drops over you.</p>
+          <button class="gift gift--end" data-gift="2" type="button" aria-label="A small hidden gift" data-i18n-attr="aria-label:gift.aria"><svg><use href="#i-gift"/></svg></button>
+        </li>
+      </ul>
+
+      <h2 class="sectiontitle reveal" data-i18n="world.title">The same feeling, around the world</h2>
+      <p class="intro reveal" data-i18n="word.lead">Every language wraps the same feeling in a different picture. Most of them describe something that comes over you before you're ready.</p>
+      <p class="hint reveal" data-i18n="world.hint">Tap a word to hear how surprised it is.</p>
+      <ul class="world reveal" id="world">
+        <li><button type="button" lang="es"><strong>sorpresa</strong><span>Español · Italiano</span></button></li>
+        <li><button type="button" lang="fr"><strong>surprise</strong><span>Français</span></button></li>
+        <li><button type="button" lang="pt"><strong>surpresa</strong><span>Português</span></button></li>
+        <li><button type="button" lang="pl"><strong>niespodzianka</strong><span>Polski</span></button></li>
+        <li><button type="button" lang="fi"><strong>yllätys</strong><span>Suomi</span></button></li>
+        <li><button type="button" lang="nl"><strong>verrassing</strong><span>Nederlands</span></button></li>
+        <li><button type="button" lang="sv"><strong>överraskning</strong><span>Svenska</span></button></li>
+        <li><button type="button" lang="el"><strong>έκπληξη</strong><span>Ελληνικά</span></button></li>
+        <li><button type="button" lang="tr"><strong>sürpriz</strong><span>Türkçe</span></button></li>
+        <li><button type="button" lang="ja"><strong>びっくり</strong><span>日本語 · bikkuri</span></button></li>
+        <li><button type="button" lang="zh"><strong>惊喜</strong><span>中文 · jīngxǐ</span></button></li>
+        <li><button type="button" lang="ko"><strong>깜짝</strong><span>한국어 · kkamjjak</span></button></li>
+      </ul>
+
+      <div class="didyou reveal">
+        <article><span class="badge">PL</span><p data-i18n="dyk.pl">…</p></article>
+        <article><span class="badge">中</span><p data-i18n="dyk.zh">…</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 02 THE SCIENCE ================= -->
+  <section class="view" id="/science" data-view="science" aria-labelledby="t-sci">
+    <div class="wrap page">
+      <header class="vhead reveal">
+        <p class="kicker"><b>02</b> <span data-i18n="nav.science">The science</span></p>
+        <h1 id="t-sci" data-i18n="feel.title">The shortest emotion you have</h1>
+        <p class="intro" data-i18n="feel.p1">Surprise lasts a few seconds at most. Then it turns into something else: joy, fear, relief, disappointment.</p>
+        <p class="intro" data-i18n="feel.p2">On its own it is neither good nor bad. It is a gap between what you expected and what you got — and the next moment decides how it feels.</p>
+      </header>
+
+      <div class="facelab reveal">
+        <div class="face" id="face">
+          <svg viewBox="0 0 240 240" role="img" aria-labelledby="faceTitle">
+            <title id="faceTitle" data-i18n="face.alt">An illustrated face showing surprise</title>
+            <circle class="face__head" cx="120" cy="124" r="96"/>
+            <g class="face__brows"><path d="M66 86 Q86 74 104 84"/><path d="M136 84 Q154 74 174 86"/></g>
+            <g class="face__eyes"><ellipse cx="88" cy="112" rx="11" ry="11"/><ellipse cx="152" cy="112" rx="11" ry="11"/></g>
+            <g class="face__shine"><circle cx="92" cy="108" r="3"/><circle cx="156" cy="108" r="3"/></g>
+            <ellipse class="face__mouth" cx="120" cy="170" rx="16" ry="20"/>
+            <g class="face__cheeks"><circle cx="70" cy="146" r="12"/><circle cx="170" cy="146" r="12"/></g>
+          </svg>
+          <button class="btn btn-accent btn-small wild-only" id="faceBtn" type="button" data-i18n="face.btn">Surprise it</button>
+        </div>
+        <ol class="facepoints">
+          <li><b>1</b><div><strong data-i18n="face.1">…</strong><span data-i18n="face.1.d">…</span></div></li>
+          <li><b>2</b><div><strong data-i18n="face.2">…</strong><span data-i18n="face.2.d">…</span></div></li>
+          <li><b>3</b><div><strong data-i18n="face.3">…</strong><span data-i18n="face.3.d">…</span></div></li>
+        </ol>
+      </div>
+
+      <h2 class="sectiontitle reveal" data-i18n="time.title">What happens, step by step</h2>
+      <ol class="timeline3 reveal">
+        <li><span class="timeline3__t" data-i18n="time.1.t">…</span><strong data-i18n="time.1">…</strong><p data-i18n="time.1.d">…</p></li>
+        <li><span class="timeline3__t" data-i18n="time.2.t">…</span><strong data-i18n="time.2">…</strong><p data-i18n="time.2.d">…</p></li>
+        <li><span class="timeline3__t" data-i18n="time.3.t">…</span><strong data-i18n="time.3">…</strong><p data-i18n="time.3.d">…</p></li>
+      </ol>
+
+      <div class="brains">
+        <article class="brain reveal"><span class="brain__ic"><svg><use href="#i-brain"/></svg></span><h3 data-i18n="br.1">…</h3><p data-i18n="br.1.d">…</p></article>
+        <article class="brain reveal"><span class="brain__ic"><svg><use href="#i-bolt"/></svg></span><h3 data-i18n="br.2">…</h3><p data-i18n="br.2.d">…</p></article>
+        <article class="brain reveal"><span class="brain__ic"><svg><use href="#i-memory"/></svg></span><h3 data-i18n="br.3">…</h3><p data-i18n="br.3.d">…</p>
+          <button class="gift gift--corner" data-gift="3" type="button" aria-label="A small hidden gift" data-i18n-attr="aria-label:gift.aria"><svg><use href="#i-gift"/></svg></button></article>
+        <a class="brain brain--link reveal" href="#/sides"><span class="brain__ic"><svg><use href="#i-door"/></svg></span><h3 data-i18n="br.4">…</h3><p data-i18n="br.4.d">…</p><span class="linkarrow"><span data-i18n="br.4.link">…</span><svg><use href="#i-arrow"/></svg></span></a>
+      </div>
+
+      <h2 class="sectiontitle reveal" data-i18n="feel.stagesTitle">Four things happen, in this order</h2>
+      <ol class="stages">
+        <li class="stage reveal"><span class="stage-n" aria-hidden="true">1</span><h3 data-i18n="stage1.t">Freeze</h3><p data-i18n="stage1.d">Everything stops. Your attention is taken without asking.</p></li>
+        <li class="stage reveal"><span class="stage-n" aria-hidden="true">2</span><h3 data-i18n="stage2.t">Find</h3><p data-i18n="stage2.d">Your brain scrambles for an explanation.</p></li>
+        <li class="stage reveal"><span class="stage-n" aria-hidden="true">3</span><h3 data-i18n="stage3.t">Shift</h3><p data-i18n="stage3.d">What you believed bends to fit what just happened.</p></li>
+        <li class="stage reveal"><span class="stage-n" aria-hidden="true">4</span><h3 data-i18n="stage4.t">Share</h3><p data-i18n="stage4.d">You need to tell someone. Immediately.</p></li>
+      </ol>
+      <p class="source reveal" data-i18n="feel.source">Sequence described by Tania Luna and LeeAnn Renninger in “Surprise” (2015).</p>
+    </div>
+  </section>
+
+  <!-- ================= 03 TWO SIDES ================= -->
+  <section class="view" id="/sides" data-view="sides" aria-labelledby="t-sides">
+    <div class="wrap page">
+      <header class="vhead vhead--center reveal">
+        <p class="kicker"><b>03</b> <span data-i18n="nav.sides">Two sides</span></p>
+        <h1 id="t-sides" data-i18n="surprise.title">Surprise, two ways</h1>
+        <p class="intro" data-i18n="surprise.lead">…</p>
+      </header>
+
+      <div class="presents">
+        <figure class="present" data-present="wait">
+          <button class="present__box" type="button" aria-expanded="false" aria-controls="q1">
+            <span class="pbox"><span class="pbox__lid"></span><span class="pbox__base"></span></span>
+            <span class="present__label" data-i18n="surprise.waiting">The one who waits</span>
+            <span class="present__cta" data-i18n="surprise.open">Open</span>
+          </button>
+          <blockquote class="present__quote" id="q1"><p data-i18n="quote.waiting">…</p><footer data-i18n="surprise.waiting">…</footer></blockquote>
+        </figure>
+        <figure class="present present--alt" data-present="give">
+          <button class="present__box" type="button" aria-expanded="false" aria-controls="q2">
+            <span class="pbox"><span class="pbox__lid"></span><span class="pbox__base"></span></span>
+            <span class="present__label" data-i18n="surprise.giving">The one who gives</span>
+            <span class="present__cta" data-i18n="surprise.open">Open</span>
+          </button>
+          <blockquote class="present__quote" id="q2"><p data-i18n="quote.giving">…</p><footer data-i18n="surprise.giving">…</footer></blockquote>
+        </figure>
+      </div>
+
+      <article class="arcs" id="arcs">
+        <h2 class="sectiontitle sectiontitle--flush" data-i18n="arc.title">Two emotional journeys</h2>
+        <svg class="arcs__svg" viewBox="0 0 600 240" aria-hidden="true">
+          <path class="arcs__grid" d="M0 130 H600"/>
+          <path class="arcs__line arcs__line--wait" pathLength="100" d="M20 150 C 120 60, 180 40, 300 50 S 470 170, 580 210"/>
+          <path class="arcs__line arcs__line--give" pathLength="100" d="M20 170 C 140 200, 220 150, 300 110 S 470 40, 580 30"/>
+        </svg>
+        <div class="arcs__stages">
+          <ol class="arcs__row arcs__row--wait"><li data-i18n="arc.wait.1">…</li><li data-i18n="arc.wait.2">…</li><li data-i18n="arc.wait.3">…</li></ol>
+          <ol class="arcs__row arcs__row--give"><li data-i18n="arc.give.1">…</li><li data-i18n="arc.give.2">…</li><li data-i18n="arc.give.3">…</li></ol>
+        </div>
+        <ul class="arcs__legend">
+          <li><i class="k k--wait"></i><span data-i18n="surprise.waiting">…</span></li>
+          <li><i class="k k--give"></i><span data-i18n="surprise.giving">…</span></li>
+        </ul>
+      </article>
+
+      <p class="insight reveal" data-i18n="sides.insight">…</p>
+
+      <!-- the one who waits, looked at more closely -->
+      <h2 class="sectiontitle reveal" data-i18n="hope.title">Excited, hopeful, and then…</h2>
+      <p class="intro reveal" data-i18n="hope.intro2">Let's stay with the one who waits for a moment. Their three steps, drawn as a line:</p>
+
+      <div class="hope-grid">
+        <figure class="story reveal">
+          <blockquote>
+            <ol class="story-steps">
+              <li><span class="step-n" aria-hidden="true">1</span><p data-i18n="hope.q1">When I think about surprises I get excited,</p></li>
+              <li><span class="step-n" aria-hidden="true">2</span><p data-i18n="hope.q2">then go to a stage where I start to get my hopes up,</p></li>
+              <li><span class="step-n step-n-end" aria-hidden="true">3</span><p data-i18n="hope.q3">and in the end I either get disappointed or feel nothing at all — because the surprise did not happen, or it was too predictable and I expected it, and it lost its meaning of being a true surprise.</p></li>
+            </ol>
+          </blockquote>
+          <figcaption>— <span data-i18n="surprise.waiting">The one who waits</span></figcaption>
+        </figure>
+
+        <div class="chart-card reveal" id="chart" data-ending="dip">
+          <div class="chart">
+            <svg viewBox="0 0 600 260" role="img" aria-labelledby="end-title end-desc">
+              <line class="axis" x1="20" y1="170" x2="580" y2="170"/>
+              <line class="moment" x1="380" y1="14" x2="380" y2="214"/>
+              <path class="line p-dip" pathLength="1" d="M20 170C110 170 150 160 215 125S330 52 380 50C402 49 408 232 452 232S545 205 580 200"/>
+              <path class="line p-flat" pathLength="1" d="M20 170C110 170 150 160 215 125S330 52 380 50C400 49 404 170 440 170L580 170"/>
+              <path class="line p-spike" pathLength="1" d="M20 170L364 170C376 170 372 28 384 28S402 118 446 128S545 150 580 152"/>
+            </svg>
+            <b class="pin pin-1 run" aria-hidden="true">1</b>
+            <b class="pin pin-2 run" aria-hidden="true">2</b>
+            <b class="pin pin-3 pin-end" aria-hidden="true">3</b>
+          </div>
+          <ul class="legend">
+            <li class="run"><b class="pin" aria-hidden="true">1</b><span data-i18n="hope.s1">excited</span></li>
+            <li class="run"><b class="pin" aria-hidden="true">2</b><span data-i18n="hope.s2">hopes up</span></li>
+            <li><b class="pin pin-end" aria-hidden="true">3</b><span data-i18n="hope.s3">the moment</span></li>
+            <li><i class="dash" aria-hidden="true"></i><span data-i18n="hope.base">an ordinary day</span></li>
+          </ul>
+
+          <div class="endings" role="group" aria-labelledby="lbl-end">
+            <p class="endings-label" id="lbl-end" data-i18n="hope.pick">How does it end?</p>
+            <div class="endings-buttons">
+              <button type="button" class="chip" data-ending="dip" aria-pressed="true" data-i18n="end.dip.btn">It never happened</button>
+              <button type="button" class="chip" data-ending="flat" aria-pressed="false" data-i18n="end.flat.btn">I saw it coming</button>
+              <button type="button" class="chip" data-ending="spike" aria-pressed="false" data-i18n="end.spike.btn">Nobody saw it coming</button>
+            </div>
+          </div>
+
+          <div class="ending-out" aria-live="polite">
+            <h3 id="end-title">Disappointment</h3>
+            <p id="end-desc">The promise was made, the hope climbed, and nothing came. The feeling doesn’t return to zero — it falls below it.</p>
+          </div>
+          <p class="chart-note" data-i18n="hope.note">A sketch, not data: the line shows how the feeling moves, not a measurement.</p>
+        </div>
+      </div>
+
+      <aside class="science reveal">
+        <h3 data-i18n="hope.sciTitle">She is describing a measurement</h3>
+        <p data-i18n="hope.sci">In the 1990s Wolfram Schultz recorded dopamine neurons while animals received rewards. An unexpected reward: a burst of activity. A fully predicted one: nothing. A predicted reward that never arrived: activity dropped below its resting level. Hope is a prediction — and the brain keeps score.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ================= 04 VOICES ================= -->
+  <section class="view" id="/voices" data-view="voices" aria-labelledby="t-voices">
+    <div class="wrap page">
+      <header class="vhead reveal">
+        <p class="kicker"><b>04</b> <span data-i18n="nav.voices">Voices</span></p>
+        <h1 id="t-voices" data-i18n="voices.title">Where does it land for you?</h1>
+        <p class="intro" data-i18n="voices.intro">The emotion has no sign of its own. The plus or minus comes from whoever feels it — so we asked each other, and now we ask you.</p>
+      </header>
+
+      <div class="spectrum reveal">
+        <div class="spectrum-dots" id="voice-dots"></div>
+        <input type="range" id="spectrum" min="0" max="100" step="1" value="50" aria-label="Your reaction to the word “surprise”" data-i18n-attr="aria-label:voices.slider">
+        <div class="spectrum-ends" aria-hidden="true">
+          <span data-i18n="voices.left">I brace</span>
+          <span data-i18n="voices.right">I light up</span>
+        </div>
+        <p class="band" id="band" aria-live="polite">Move the slider to answer.</p>
+        <p class="nearest" id="nearest" hidden></p>
+      </div>
+
+      <h2 class="sectiontitle reveal" data-i18n="voices.listTitle">On the same line</h2>
+      <ul class="voice-list" id="voice-list"></ul>
+    </div>
+  </section>
+
+  <!-- ================= 05 MAKE ONE ================= -->
+  <section class="view" id="/make" data-view="make" aria-labelledby="t-make">
+    <div class="wrap page">
+      <header class="vhead reveal">
+        <p class="kicker"><b>05</b> <span data-i18n="nav.make">Make one</span></p>
+        <h1 id="t-make" data-i18n="make.title">How to make a surprise that really surprises</h1>
+        <p class="intro" data-i18n="make.lead">…</p>
+      </header>
+
+      <ol class="rules">
+        <li class="rule reveal"><b>1</b><h3 data-i18n="rule.1">…</h3><p data-i18n="rule.1.d">…</p></li>
+        <li class="rule reveal"><b>2</b><h3 data-i18n="rule.2">…</h3><p data-i18n="rule.2.d">…</p></li>
+        <li class="rule reveal"><b>3</b><h3 data-i18n="rule.3">…</h3><p data-i18n="rule.3.d">…</p></li>
+        <li class="rule reveal"><b>4</b><h3 data-i18n="rule.4">…</h3><p data-i18n="rule.4.d">…</p></li>
+        <li class="rule reveal"><b>5</b><h3 data-i18n="rule.5">…</h3><p data-i18n="rule.5.d">…</p>
+          <button class="gift gift--corner" data-gift="4" type="button" aria-label="A small hidden gift" data-i18n-attr="aria-label:gift.aria"><svg><use href="#i-gift"/></svg></button></li>
+      </ol>
+
+      <article class="idea reveal" id="idea">
+        <div class="idea__side">
+          <span class="idea__ic"><svg><use href="#i-dice"/></svg></span>
+          <h2 data-i18n="idea.title">Need an idea?</h2>
+          <p data-i18n="idea.lead">…</p>
+        </div>
+        <div class="idea__card">
+          <p class="idea__count" id="ideaCount">—</p>
+          <p class="idea__text" id="ideaText" aria-live="polite" data-i18n="idea.empty">…</p>
+          <button class="btn btn-accent" id="ideaBtn" type="button"><svg><use href="#i-spark"/></svg><span>Give me an idea</span></button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= 06 PLAY ================= -->
+  <section class="view" id="/play" data-view="play" aria-labelledby="t-play">
+    <div class="wrap page">
+      <header class="vhead vhead--center reveal">
+        <p class="kicker"><b>06</b> <span data-i18n="nav.play">Play</span></p>
+        <h1 id="t-play" data-i18n="play.title">Pick a box</h1>
+        <p class="intro" data-i18n="play.lead">…</p>
+      </header>
+      <ul class="boxes" id="boxes"></ul>
+      <div class="play__foot">
+        <p id="playCount" aria-live="polite"></p>
+        <button class="btn btn-ghost" id="rewrap" type="button"><svg><use href="#i-refresh"/></svg><span data-i18n="play.reset">Wrap them again</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ⓘ BEHIND THE SITE ================= -->
+  <section class="view" id="/about" data-view="about" aria-labelledby="t-about">
+    <div class="wrap page">
+      <header class="vhead reveal">
+        <p class="kicker"><b><svg><use href="#i-info"/></svg></b> <span data-i18n="nav.about">Behind the site</span></p>
+        <h1 id="t-about" data-i18n="about.title">How this site works</h1>
+        <p class="intro" data-i18n="about.lead">For the curious: the logic behind the pages, and what the colours are doing here.</p>
+      </header>
+
+      <ul class="notes">
+        <li class="note reveal"><h3 data-i18n="about.s.t">Structure</h3><p data-i18n="about.s.d">…</p></li>
+        <li class="note reveal"><h3 data-i18n="design.c.t">Colour</h3><p data-i18n="design.c.d">…</p></li>
+        <li class="note reveal"><h3 data-i18n="design.t.t">Type</h3><p data-i18n="design.t.d">…</p></li>
+        <li class="note reveal"><h3 data-i18n="design.a.t">Adaptive</h3><p data-i18n="design.a.d">…</p></li>
+      </ul>
+
+      <h2 class="sectiontitle reveal" data-i18n="colors.title">What each colour is doing here</h2>
+      <p class="intro reveal" data-i18n="colors.lead">Six colours, each with a job. Colour psychology is closer to folklore than to science, so read the last line as a game.</p>
+      <p class="hint wild-only" data-i18n="you.wild">Pick your favourite. Something will happen.</p>
+      <p class="hint calm-only" data-i18n="you.calm">Pick your favourite. A short description appears on its card, nothing else.</p>
+      <ul class="colours" id="colours"></ul>
+    </div>
+  </section>
+
+  <!-- back / next -->
+  <nav class="pager wrap" id="pager" aria-label="Chapters"></nav>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="egg">
+      <button type="button" class="btn btn-ghost" id="egg-btn">
+        <span class="wild-only" data-i18n="egg.wild">Don’t press this</span>
+        <span class="calm-only" data-i18n="egg.calm">This button shows a short message</span>
+      </button>
+      <p class="egg-out" id="egg-out" role="status"></p>
+    </div>
+    <div class="foot-text">
+      <p class="foot-made"><svg><use href="#i-heart"/></svg><span data-i18n="footer.made">A website about one word.</span></p>
+      <p class="foot-note" data-i18n="footer.text">Made for the Adaptive Web Design course.</p>
+      <p class="foot-by">© by Ștefania Dobra · web design · 2026</p>
+    </div>
+    <button type="button" class="foot-top" id="to-top" data-i18n="foot.top">Back to top</button>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<dialog class="modal" id="doneModal" aria-labelledby="doneTitle">
+  <div class="modal__art"><svg><use href="#i-gift"/></svg></div>
+  <h2 id="doneTitle" data-i18n="gifts.done.title">All five found!</h2>
+  <p data-i18n="gifts.done.text">Some surprises do happen. Thank you for looking closely.</p>
+  <form method="dialog"><button class="btn btn-accent" data-i18n="gifts.close">Close</button></form>
+</dialog>
+
+<script src="js/i18n.js"></script>
+<script src="js/voices.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
