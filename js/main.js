@@ -291,9 +291,12 @@
   /* The menu is a row while it fits next to the logo; when it doesn't (narrow screen,
      or a language with longer words), it turns into a full-screen sheet. */
   function fitNav() {
+    root.classList.add('nav-measuring');             // no transitions while the row layout is tried out
     root.classList.remove('nav-sheet');
     if (bar.scrollWidth > bar.clientWidth + 1) root.classList.add('nav-sheet');
     else setMenu(false);
+    void bar.offsetWidth;
+    root.classList.remove('nav-measuring');
     movePill();
   }
   function movePill() {
@@ -303,8 +306,12 @@
     pill.style.left = (ar.left - nr.left - 1) + 'px';
     pill.style.width = ar.width + 'px';
   }
-  var resizeRaf = 0;
+  /* Phones fire "resize" every time the address bar hides or shows while scrolling.
+     Only a change in width can change whether the menu fits, so height-only resizes are ignored. */
+  var resizeRaf = 0, lastWidth = window.innerWidth;
   window.addEventListener('resize', function () {
+    if (window.innerWidth === lastWidth) return;
+    lastWidth = window.innerWidth;
     cancelAnimationFrame(resizeRaf);
     resizeRaf = requestAnimationFrame(fitNav);
   });
@@ -313,6 +320,14 @@
      CHAPTERS — one per page (#/word, #/science …)
      ------------------------------------------------------------------ */
   var firstRoute = true;
+
+  /* go to the top of the new chapter at once, in every browser (older phones reject behavior: 'instant') */
+  function jumpToTop() {
+    var prev = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    root.style.scrollBehavior = prev;
+  }
 
   function route() {
     var m = location.hash.match(/^#\/(\w+)/);
@@ -332,8 +347,8 @@
     renderPager();
     setTitle();
     if (!firstRoute) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-      $('#views').focus({ preventScroll: true });
+      jumpToTop();
+      try { $('#views').focus({ preventScroll: true }); } catch (e) {}
     }
     firstRoute = false;
     onEnter(id);
@@ -392,7 +407,9 @@
     });
   }
   window.addEventListener('scroll', onScroll, { passive: true });
-  $('#to-top').addEventListener('click', function () { window.scrollTo({ top: 0, behavior: motionOn() ? 'smooth' : 'auto' }); });
+  $('#to-top').addEventListener('click', function () {
+    try { window.scrollTo({ top: 0, behavior: motionOn() ? 'smooth' : 'auto' }); } catch (e) { window.scrollTo(0, 0); }
+  });
 
   /* ------------------------------------------------------------------
      THE FORTUNE COOKIE
@@ -491,7 +508,7 @@
       dot.addEventListener('click', function () {
         var card = $('#voice-' + v.id);
         $$('.voice').forEach(function (c) { c.classList.toggle('is-target', c === card); });
-        card.scrollIntoView({ block: 'center', behavior: motionOn() ? 'smooth' : 'auto' });
+        try { card.scrollIntoView({ block: 'center', behavior: motionOn() ? 'smooth' : 'auto' }); } catch (e) { card.scrollIntoView(); }
       });
       dots.appendChild(dot);
     });
@@ -626,6 +643,7 @@
         btn.setAttribute('aria-pressed', 'true');
         opened.push(i);
         renderBoxes();
+        replay($('#why-mirror'), 'pop');
         confettiFrom(btn, content === 3 ? 0 : 30);     // the empty box stays quiet
         if (content === 9) unlockGift('5');
       });
@@ -643,6 +661,12 @@
       back.classList.toggle('is-empty', c === 3);
     });
     $('#playCount').textContent = t('play.count').replace('{n}', opened.length);
+    /* the mirror under the boxes: the visitor just did what the research below explains */
+    var mirror = $('#why-mirror');
+    if (mirror) {
+      var key = opened.length === 0 ? 'why.mirror0' : opened.length === 9 ? 'why.mirrorAll' : 'why.mirror';
+      mirror.textContent = t(key).replace('{n}', opened.length);
+    }
   }
   $('#rewrap').addEventListener('click', wrapBoxes);
 
@@ -746,21 +770,19 @@
   /* ------------------------------------------------------------------
      THE BUTTON IN THE FOOTER — a different message every time
      ------------------------------------------------------------------ */
-  var eggBtn = $('#egg-btn'), eggWild = 0, eggCalm = 0;
+  var eggBtn = $('#egg-btn'), eggN = 0;
 
   function renderEgg() {
     var out = $('#egg-out');
     if (out) out.textContent = state.egg ? t(state.egg) : '';
   }
+  /* Always “Don't press this”, in both moods. The last message promises confetti,
+     so it only comes up when motion is on; calm mode loops through the others. */
   eggBtn.addEventListener('click', function () {
-    if (motionOn()) {
-      eggWild = eggWild >= 8 ? 2 : eggWild + 1;
-      state.egg = 'egg.w' + eggWild;
-      confettiFrom(eggBtn, eggWild === 8 ? 220 : eggWild === 1 ? 120 : 25);
-    } else {
-      eggCalm = eggCalm % 3 + 1;
-      state.egg = 'egg.c' + eggCalm;
-    }
+    var last = motionOn() ? 8 : 7;
+    eggN = eggN >= last ? 2 : eggN + 1;
+    state.egg = 'egg.w' + eggN;
+    confettiFrom(eggBtn, eggN === 8 ? 220 : eggN === 1 ? 120 : 25);   // does nothing in calm mode
     renderEgg();
     replay($('#egg-out'), 'pop');
   });

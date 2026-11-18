@@ -14,6 +14,7 @@
     (function () {
       var d = document.documentElement;
       d.className += ' js';
+      if (window.innerWidth < 1100) d.className += ' nav-sheet';   // narrow screens start with the menu folded; main.js then measures exactly
       try {
         var t = localStorage.getItem('sp-theme');
         if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
@@ -172,21 +173,51 @@
       <!-- the fortune cookie -->
       <section class="cookie reveal" aria-labelledby="cookie-title">
         <button type="button" class="cookie__btn" id="cookie-btn">
-          <svg class="ck" id="ck" viewBox="0 0 200 150" aria-hidden="true">
-            <g class="ck-rays"><path d="M100 28V8M68 34 56 18M132 34l12-16M42 50 26 40M158 50l16-10"/></g>
-            <g class="ck-paper">
-              <rect x="52" y="60" width="96" height="26" rx="2"/>
-              <path d="M64 69h72M64 77h48"/>
-            </g>
-            <g class="ck-l">
-              <path class="ck-shell" d="M100 44C74 12 22 22 16 70c-3 30 32 52 68 42 8-2 13-8 16-16L95 80l9-12-10-12z"/>
-              <path class="ck-shade" d="M30 92c14 14 34 18 52 14"/>
-              <path class="ck-shine" d="M36 48c8-10 20-15 32-14"/>
+          <svg class="ck" id="ck" viewBox="0 0 240 170" aria-hidden="true">
+            <defs>
+              <linearGradient id="ck-g1" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#FCE3A4"/><stop offset=".45" stop-color="#F0B654"/><stop offset="1" stop-color="#C27D1D"/>
+              </linearGradient>
+              <linearGradient id="ck-g2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#F5CB78"/><stop offset=".5" stop-color="#E19E38"/><stop offset="1" stop-color="#AE6A14"/>
+              </linearGradient>
+              <radialGradient id="ck-hi" cx=".32" cy=".24" r=".55">
+                <stop offset="0" stop-color="#FFF8DC" stop-opacity=".9"/><stop offset="1" stop-color="#FFF8DC" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <ellipse class="ck-shadow" cx="120" cy="155" rx="88" ry="8"/>
+            <g class="ck-rays"><path d="M120 18V2M84 24 72 8M156 24l12-16M52 40 36 30M188 40l16-10"/></g>
+            <!-- the note, seen once the cookie is open -->
+            <g class="ck-paper"><g transform="rotate(-5 120 96)">
+              <rect class="ck-slip" x="62" y="80" width="116" height="32" rx="2"/>
+              <path class="ck-slipline" d="M76 91h88M76 101h58"/>
+            </g></g>
+            <!-- the end of the note sticking out while the cookie is closed -->
+            <g class="ck-tail">
+              <path class="ck-slip" d="M172 114l60 25-5 13-60-25z"/>
+              <path class="ck-slipline" d="M186 127l36 15"/>
             </g>
             <g class="ck-r">
-              <path class="ck-shell" d="M100 44c26-32 78-22 84 26 3 30-32 52-68 42-8-2-13-8-16-16L95 80l9-12-10-12z"/>
-              <path class="ck-shade" d="M170 92c-14 14-34 18-52 14"/>
-              <path class="ck-shine" d="M132 34c12-1 24 4 32 14"/>
+              <path class="ck-body" fill="url(#ck-g2)" d="M120 30C180 26 222 66 218 110C216 132 196 146 174 140C148 133 132 112 120 92L113 78L123 64L114 48Z"/>
+              <path class="ck-inner" d="M176 132C152 126 136 108 124 88"/>
+              <circle class="ck-speck" cx="176" cy="66" r="2"/><circle class="ck-speck" cx="196" cy="98" r="1.7"/><circle class="ck-speck" cx="160" cy="98" r="1.5"/><circle class="ck-speck" cx="150" cy="54" r="1.6"/><circle class="ck-speck" cx="188" cy="124" r="1.4"/>
+              <path class="ck-outline" d="M120 30C180 26 222 66 218 110C216 132 196 146 174 140C148 133 132 112 120 92"/>
+              <path class="ck-edge" d="M120 92L113 78L123 64L114 48L120 30"/>
+            </g>
+            <g class="ck-l">
+              <path class="ck-body" fill="url(#ck-g1)" d="M120 30C60 26 18 66 22 110C24 132 44 146 66 140C92 133 108 112 120 92L113 78L123 64L114 48Z"/>
+              <path class="ck-body" fill="url(#ck-hi)" d="M120 30C60 26 18 66 22 110C24 132 44 146 66 140C92 133 108 112 120 92L113 78L123 64L114 48Z"/>
+              <path class="ck-inner" d="M64 132C88 126 104 108 116 88"/>
+              <circle class="ck-speck" cx="58" cy="80" r="2.2"/><circle class="ck-speck" cx="82" cy="58" r="1.6"/><circle class="ck-speck" cx="46" cy="106" r="1.8"/><circle class="ck-speck" cx="92" cy="98" r="1.5"/><circle class="ck-speck" cx="70" cy="118" r="1.4"/>
+              <path class="ck-outline" d="M120 30C60 26 18 66 22 110C24 132 44 146 66 140C92 133 108 112 120 92"/>
+              <path class="ck-edge" d="M120 92L113 78L123 64L114 48L120 30"/>
+            </g>
+            <!-- the fold of the closed cookie -->
+            <path class="ck-foldshade" d="M120 31C131 50 131 76 120 92C114 74 113 50 120 31Z"/>
+            <path class="ck-fold" d="M120 31C111 50 111 74 120 92"/>
+            <g class="ck-crumbs">
+              <path class="ck-crumb" d="M96 132l7-3 3 6-8 3z"/><path class="ck-crumb" d="M142 140l6 1-1 5-6-2z"/>
+              <circle class="ck-crumb" cx="118" cy="144" r="2.6"/><circle class="ck-crumb" cx="156" cy="128" r="1.9"/><circle class="ck-crumb" cx="84" cy="146" r="1.6"/>
             </g>
           </svg>
           <span class="btn btn-accent" id="cookie-label">Crack it open</span>
@@ -264,6 +295,17 @@
           <button class="gift gift--end" data-gift="2" type="button" aria-label="A small hidden gift" data-i18n-attr="aria-label:gift.aria"><svg><use href="#i-gift"/></svg></button>
         </li>
       </ul>
+
+      <!-- the same picture in four languages -->
+      <h2 class="sectiontitle reveal" data-i18n="idiom.title">Out of a clear sky</h2>
+      <p class="intro reveal" data-i18n="idiom.lead">…</p>
+      <ul class="idioms">
+        <li class="idiom reveal"><svg class="idiom__bolt" aria-hidden="true"><use href="#i-bolt"/></svg><p class="idiom__lang" data-i18n="lang.ro">Romanian</p><p class="idiom__phrase" lang="ro">ca un trăsnet din senin</p><p class="idiom__lit" data-i18n="idiom.ro">…</p></li>
+        <li class="idiom reveal"><svg class="idiom__bolt" aria-hidden="true"><use href="#i-bolt"/></svg><p class="idiom__lang" data-i18n="lang.de">German</p><p class="idiom__phrase" lang="de">wie ein Blitz aus heiterem Himmel</p><p class="idiom__lit" data-i18n="idiom.de">…</p></li>
+        <li class="idiom reveal"><svg class="idiom__bolt" aria-hidden="true"><use href="#i-bolt"/></svg><p class="idiom__lang" data-i18n="lang.hu">Hungarian</p><p class="idiom__phrase" lang="hu">derült égből villámcsapás</p><p class="idiom__lit" data-i18n="idiom.hu">…</p></li>
+        <li class="idiom reveal"><svg class="idiom__bolt" aria-hidden="true"><use href="#i-bolt"/></svg><p class="idiom__lang" data-i18n="lang.en">English</p><p class="idiom__phrase" lang="en">a bolt from the blue</p><p class="idiom__lit" data-i18n="idiom.en">…</p></li>
+      </ul>
+      <p class="idiom-note reveal" data-i18n="idiom.note">…</p>
 
       <h2 class="sectiontitle reveal" data-i18n="world.title">The same feeling, around the world</h2>
       <p class="intro reveal" data-i18n="word.lead">Every language wraps the same feeling in a different picture. Most of them describe something that comes over you before you're ready.</p>
@@ -524,6 +566,25 @@
         <p id="playCount" aria-live="polite"></p>
         <button class="btn btn-ghost" id="rewrap" type="button"><svg><use href="#i-refresh"/></svg><span data-i18n="play.reset">Wrap them again</span></button>
       </div>
+      <!-- why we tap on gifts: the boxes above were the experiment -->
+      <section class="why" aria-labelledby="why-title">
+        <p class="why__mirror" id="why-mirror" aria-live="polite"></p>
+        <h2 class="sectiontitle reveal" id="why-title" data-i18n="why.title">Why do we tap on gifts?</h2>
+        <p class="intro reveal" data-i18n="why.lead">…</p>
+        <ol class="reasons">
+          <li class="reason reveal"><span class="reason__n" aria-hidden="true">1</span><h3 data-i18n="why.r1.t">…</h3><p data-i18n="why.r1.d">…</p><p class="reason__src" data-i18n="why.r1.s">…</p></li>
+          <li class="reason reveal"><span class="reason__n" aria-hidden="true">2</span><h3 data-i18n="why.r2.t">…</h3><p data-i18n="why.r2.d">…</p><p class="reason__src" data-i18n="why.r2.s">…</p></li>
+          <li class="reason reveal"><span class="reason__n" aria-hidden="true">3</span><h3 data-i18n="why.r3.t">…</h3><p data-i18n="why.r3.d">…</p><p class="reason__src" data-i18n="why.r3.s">…</p></li>
+        </ol>
+        <h3 class="sectiontitle reveal" data-i18n="why.ex.title">Where you meet them</h3>
+        <ul class="examples">
+          <li class="example reveal"><h4 data-i18n="why.ex1.t">…</h4><p data-i18n="why.ex1.d">…</p></li>
+          <li class="example reveal"><h4 data-i18n="why.ex2.t">…</h4><p data-i18n="why.ex2.d">…</p></li>
+          <li class="example reveal"><h4 data-i18n="why.ex3.t">…</h4><p data-i18n="why.ex3.d">…</p></li>
+          <li class="example reveal"><h4 data-i18n="why.ex4.t">…</h4><p data-i18n="why.ex4.d">…</p></li>
+        </ul>
+        <p class="insight reveal" data-i18n="why.end">…</p>
+      </section>
     </div>
   </section>
 
@@ -548,6 +609,22 @@
       <p class="hint wild-only" data-i18n="you.wild">Pick your favourite. Something will happen.</p>
       <p class="hint calm-only" data-i18n="you.calm">Pick your favourite. A short description appears on its card, nothing else.</p>
       <ul class="colours" id="colours"></ul>
+
+      <h2 class="sectiontitle reveal" data-i18n="src.title">Sources</h2>
+      <p class="intro reveal" data-i18n="src.lead">…</p>
+      <ol class="sources reveal">
+          <li><span class="src-text">Online Etymology Dictionary: <i>surprise</i> · DEX online: <i>surpriză</i> · Duden: <i>überraschen</i> · Wiktionary: <i>meglep</i>, <i>lepedő</i></span><span class="src-tags"><a href="#/word" data-i18n="nav.word">word</a></span></li>
+          <li><span class="src-text">Ekman, P. &amp; Friesen, W. V. (1975). <i>Unmasking the Face</i>. Prentice-Hall.</span><span class="src-tags"><a href="#/science" data-i18n="nav.science">science</a></span></li>
+          <li><span class="src-text">Luna, T. &amp; Renninger, L. (2015). <i>Surprise: Embrace the Unpredictable and Engineer the Unexpected</i>. TarcherPerigee.</span><span class="src-tags"><a href="#/science" data-i18n="nav.science">science</a></span></li>
+          <li><span class="src-text">Schultz, W., Dayan, P. &amp; Montague, P. R. (1997). A neural substrate of prediction and reward. <i>Science</i>, 275(5306), 1593–1599.</span><span class="src-tags"><a href="#/sides" data-i18n="nav.sides">sides</a><a href="#/play" data-i18n="nav.play">play</a></span></li>
+          <li><span class="src-text">Fiorillo, C. D., Tobler, P. N. &amp; Schultz, W. (2003). Discrete coding of reward probability and uncertainty by dopamine neurons. <i>Science</i>, 299(5614), 1898–1902.</span><span class="src-tags"><a href="#/play" data-i18n="nav.play">play</a></span></li>
+          <li><span class="src-text">Loewenstein, G. (1994). The psychology of curiosity: A review and reinterpretation. <i>Psychological Bulletin</i>, 116(1), 75–98.</span><span class="src-tags"><a href="#/play" data-i18n="nav.play">play</a></span></li>
+          <li><span class="src-text">Ferster, C. B. &amp; Skinner, B. F. (1957). <i>Schedules of Reinforcement</i>. Appleton-Century-Crofts.</span><span class="src-tags"><a href="#/play" data-i18n="nav.play">play</a></span></li>
+          <li><span class="src-text">Stahl, A. E. &amp; Feigenson, L. (2015). Observing the unexpected enhances infants’ learning and exploration. <i>Science</i>, 348(6230), 91–94.</span><span class="src-tags"><a href="#/play" data-i18n="nav.play">play</a></span></li>
+          <li><span class="src-text">European Commission (31 October 2024). <i>Commission opens formal proceedings against Temu under the Digital Services Act</i>. Press release.</span><span class="src-tags"><a href="#/play" data-i18n="nav.play">play</a></span></li>
+          <li><span class="src-text">Belgian Gaming Commission (April 2018). <i>Research report on loot boxes</i>.</span><span class="src-tags"><a href="#/play" data-i18n="nav.play">play</a></span></li>
+          <li><span class="src-text">Ferrero: history of the Kinder brand · Wikipedia: <i>Kinder Surprise</i>.</span><span class="src-tags"><a href="#/play" data-i18n="nav.play">play</a></span></li>
+      </ol>
     </div>
   </section>
 
@@ -560,8 +637,7 @@
   <div class="wrap footer-inner">
     <div class="egg">
       <button type="button" class="btn btn-ghost" id="egg-btn">
-        <span class="wild-only" data-i18n="egg.wild">Don’t press this</span>
-        <span class="calm-only" data-i18n="egg.calm">This button shows a short message</span>
+        <span data-i18n="egg.wild">Don’t press this</span>
       </button>
       <p class="egg-out" id="egg-out" role="status"></p>
     </div>
